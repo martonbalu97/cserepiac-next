@@ -1,7 +1,7 @@
 'use client';
 
 import axios from "axios";
-import { AiFillGithub } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
@@ -107,7 +107,7 @@ const RegisterModal= () => {
       <Button 
         outline 
         label="Folytatás Github felhasználóval"
-        icon={AiFillGithub}
+        icon={FaFacebook}
         onClick={() => signIn('github')}
       />
       <div 
