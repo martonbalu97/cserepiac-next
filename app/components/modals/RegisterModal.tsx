@@ -108,7 +108,7 @@ const RegisterModal= () => {
         outline 
         label="Folytatás Facebook felhasználóval"
         icon={FaFacebook}
-        onClick={() => signIn('github')}
+        onClick={() => signIn('facebook')}
       />
       <div 
         className="
