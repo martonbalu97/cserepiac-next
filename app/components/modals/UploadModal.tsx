@@ -3,29 +3,34 @@
 import Modal from "./Modal";
 import useUploadModal from "@/app/hooks/useUploadModal"
 import TypeWriter from "@/app/typewriter/TypeWriter";
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 
 const UploadModal = () => {
     const uploadModal = useUploadModal();
-
+    const [text, setText] = useState("")
     const bodyContent = (
         <div>
             <TypeWriter 
-         text={"Hello Balázs, én foglak végigvezetni a kezdeteken..."}
-         interKeyStrokeDurationInMs={160}/>
-        </div>
-    )
+         text={text}
+         interKeyStrokeDurationInMs={140}/>
+       </div>
+     )
+
+    useEffect(() =>{
+          setText("Hello Balázs, én foglak végigvezetni a kezdeteken...")
+    })
     
-    return ( 
-        <Modal
-        title="Termék feltöltése"
-        isOpen={uploadModal.isOpen}
-        onClose={uploadModal.onClose}
-        onSubmit={uploadModal.onClose}
-        actionLabel="Tovább"
-        body={bodyContent}
-        />
-     );
+
+    return (
+    <Modal
+    title="Termék feltöltése"
+    isOpen={uploadModal.isOpen}
+    onClose={uploadModal.onClose}
+    onSubmit={uploadModal.onClose}
+    actionLabel="Tovább"
+    body={bodyContent}
+    />
+    )
 }
- 
+
 export default UploadModal;
