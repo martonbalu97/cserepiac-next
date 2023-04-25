@@ -121,7 +121,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 
                 <MenuItem 
                   label="Saját piac" 
-                  onClick={() => {}}
+                  onClick={onUpload}
                 />
                 <hr />
                 <MenuItem 
