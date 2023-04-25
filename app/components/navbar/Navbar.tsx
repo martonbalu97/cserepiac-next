@@ -34,7 +34,9 @@ const Navbar: React.FC<NavbarProps> = ({
           "
         >
           <Logo />
-         
+         <TypeWriter 
+         text={"Hello Balázs"}
+         interKeyStrokeDurationInMs={150}/>
           <UserMenu currentUser={currentUser} />
         </div>
       </Container>

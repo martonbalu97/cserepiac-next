@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import useUploadModal from "@/app/hooks/useUploadModal"
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
@@ -23,6 +24,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const uploadModal = useUploadModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,21 +32,21 @@ const UserMenu: React.FC<UserMenuProps> = ({
     setIsOpen((value) => !value);
   }, []);
 
-  const onPiac = useCallback(() =>{
+  const onUpload = useCallback(() =>{
       if(!currentUser){
         return loginModal.onOpen();
       }
 
-      //open piac modal
+      uploadModal.onOpen();
 
-  }, [currentUser,loginModal])
+  }, [currentUser,loginModal,uploadModal])
 
 
   return ( 
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div 
-          onClick={onPiac}
+          onClick={onUpload}
           className="
             hidden
             md:block

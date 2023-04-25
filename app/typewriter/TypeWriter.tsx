@@ -4,33 +4,35 @@ import React, {useState, useEffect, useRef} from 'react'
 
 interface TypeWriterProps{
     text: string | null,
+    interKeyStrokeDurationInMs: number
 }
 
 const TypeWriter: React.FC<TypeWriterProps> = ({
-    text
+    text,
+    interKeyStrokeDurationInMs
 }) => {
-    const index = useRef(0)
+    const [currentPosition, setCurrentPosition] = useState(0);
+    const currentPositionRef = useRef(0);
 
-    const [currentText, setCurrentText] = useState('')
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("interval");
+      setCurrentPosition((value) => value + 1);
+      currentPositionRef.current += 1;
+      if (currentPositionRef.current > text!.length) {
+        clearInterval(intervalId);
+      }
+    }, interKeyStrokeDurationInMs);
+    return () => {
+      clearInterval(intervalId);
+      currentPositionRef.current = 0;
+      setCurrentPosition(0);
+    };
+  }, [interKeyStrokeDurationInMs, text]);
 
-    useEffect(() =>{
-        index.current = 0;
-        setCurrentText('')
-    },[text]);
-    
-    useEffect(() =>{
-        const timeoutId = setTimeout(() =>{
-            setCurrentText((value) => value + text!.charAt(index.current));
-            index.current += 1
-        },500);
-        return () =>{
-            clearTimeout(timeoutId)
-        }
-    },[currentText,text])
+  return (
+    <p>{text!.substring(0, currentPosition)}</p>  
+  );
 
-    return(
-        <p>{currentText}</p>
-    )
 }
-
 export default TypeWriter;

@@ -10,6 +10,7 @@ import ToasterProvider from '@/app/providers/ToasterProvider';
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from './actions/getCurrentUser';
+import UploadModal from './components/modals/UploadModal';
 
 export const metadata = {
   title: 'CSEREPIAC.HU',
@@ -32,6 +33,7 @@ export default async function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
+          <UploadModal/>
           <LoginModal />
           <RegisterModal />
           <Navbar currentUser={currentUser} />
