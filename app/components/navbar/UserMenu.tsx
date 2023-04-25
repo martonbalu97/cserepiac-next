@@ -33,9 +33,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
   }, []);
 
   const onUpload = useCallback(() =>{
+      /*
       if(!currentUser){
         return loginModal.onOpen();
       }
+      */
 
       uploadModal.onOpen();
 
@@ -60,7 +62,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             cursor-pointer
           "
         >
-          Saját piac
+          Termék feltöltése
         </div>
         <div 
         onClick={toggleOpen}

@@ -49,6 +49,19 @@ export const categories = [
     },
 ]
 
+export const subCategs = [
+    {
+        category:'Sport',
+        subcategory:'Focilabda',
+        icon: MdOutlineSportsBaseball
+    },
+    {
+        category:'Sport',
+        subcategory:'Háló',
+        icon: MdOutlineSportsBaseball
+    },
+]
+
 
 const Categories = () => {
     const params =  useSearchParams();

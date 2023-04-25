@@ -53,6 +53,7 @@ model Listing {
   createdAt DateTime @default(now())
   category  String
   subcategory String
+  city String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
