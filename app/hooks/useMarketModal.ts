@@ -1,16 +1,16 @@
 import { create } from 'zustand';
 
-interface MarketModelProps {
+interface LoginModalStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useMarketModel = create<MarketModelProps>((set) => ({
+const useLoginModal = create<LoginModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false })
 }));
 
 
-export default useMarketModel;
+export default useLoginModal;

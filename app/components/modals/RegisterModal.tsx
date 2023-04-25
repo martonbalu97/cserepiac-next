@@ -118,7 +118,7 @@ const RegisterModal= () => {
           font-light
         "
       >
-        <p>Already have an account?
+        <p>Már piacozó vagy?
           <span 
             onClick={onToggle} 
             className="
@@ -126,7 +126,7 @@ const RegisterModal= () => {
               cursor-pointer 
               hover:underline
             "
-            > Log in</span>
+            > Lépj be</span>
         </p>
       </div>
     </div>

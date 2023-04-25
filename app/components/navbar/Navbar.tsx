@@ -1,4 +1,6 @@
 import { SafeUser } from "@/app/types";
+import Categories from "./Categories";
+import TypeWriter from "@/app/typewriter/TypeWriter";
 
 
 import Container from "../Container";
@@ -32,11 +34,13 @@ const Navbar: React.FC<NavbarProps> = ({
           "
         >
           <Logo />
+         
           <UserMenu currentUser={currentUser} />
         </div>
       </Container>
-    </div>
-  </div>
+      </div>
+        <Categories />
+      </div>
   );
 }
 
