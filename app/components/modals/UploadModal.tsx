@@ -3,6 +3,7 @@
 import Modal from "./Modal";
 import useUploadModal from "@/app/hooks/useUploadModal"
 import TypeWriter from "@/app/typewriter/TypeWriter";
+import {useEffect} from 'react'
 
 const UploadModal = () => {
     const uploadModal = useUploadModal();
@@ -14,6 +15,7 @@ const UploadModal = () => {
          interKeyStrokeDurationInMs={160}/>
         </div>
     )
+    
     return ( 
         <Modal
         title="Termék feltöltése"
@@ -21,6 +23,7 @@ const UploadModal = () => {
         onClose={uploadModal.onClose}
         onSubmit={uploadModal.onClose}
         actionLabel="Tovább"
+        body={bodyContent}
         />
      );
 }
