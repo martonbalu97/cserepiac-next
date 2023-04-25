@@ -7,6 +7,7 @@ import {useEffect,useState, useMemo} from 'react'
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
+import { FieldValue, FieldValues, useForm } from "react-hook-form";
 
 enum STEPS {
     CATEGORY = 0,
@@ -20,6 +21,35 @@ const UploadModal = () => {
     const uploadModal = useUploadModal();
     
     const [step,setSteps] = useState(STEPS.CATEGORY)
+
+    const{
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState:{
+            errors,
+        },
+        reset
+    } = useForm<FieldValues>({
+        defaultValues:{
+            category:'',
+            subcategory:'',
+            title:'',
+            description:'',
+            imageSrc:''
+        }
+    });
+
+    const category = watch('category');
+
+    const setCustomValue = (id:string, value:any) =>{
+        setValue(id,value, {
+            shouldDirty:true,
+            shouldTouch:true,
+            shouldValidate:true
+        })
+    }
 
     const onBack = () =>{
         setSteps((value) => value - 1)
@@ -68,10 +98,10 @@ const UploadModal = () => {
                 key={item.label}
                 >
                    <CategoryInput
-                   onClick={() => {}}
-                   selected={false}
+                   onClick={(category) => setCustomValue('category',category)}
+                   selected={category == item.label}
                    label={item.label}
-                   icon={item.label}
+                   icon={item.icon}
                    />
                 </div>
               ))}
