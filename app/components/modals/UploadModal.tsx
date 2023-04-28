@@ -9,7 +9,7 @@ import { categories, subCategs } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValue, FieldValues, useForm } from "react-hook-form";
 import { sub } from "date-fns";
-import CitySelect from "../inputs/CitySelect"
+import CitySelect, { CitySelectValue } from "../inputs/CitySelect"
 
 enum STEPS {
     CATEGORY = 0,
@@ -160,7 +160,7 @@ const UploadModal = () => {
                 />
                 <CitySelect
                  onChange={(value) => setCustomValue('city', value)}
-                 value={city}
+                 value={city as CitySelectValue}
                 />
             </div>
         )

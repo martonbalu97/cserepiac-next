@@ -1,14 +1,14 @@
 'use client'
 
-import Select from 'react-select'
+import Select, { GroupBase, OptionsOrGroups } from 'react-select'
 import useCities from '@/app/hooks/useCities';
 import { PublicBaseSelectProps } from 'react-select/dist/declarations/src/Select';
 
 export type CitySelectValue = {
-    value: string;
-    label:string;
-    lat: string;
-    long: string;
+    value: string | null;
+    label:string | null;
+    lat: string | null;
+    long: string | null;
 }
 
 interface CitySelectProps {
@@ -27,9 +27,9 @@ const CitySelect: React.FC<CitySelectProps> = ({
             <Select
             placeholder="Bárhol"
             isClearable={true}
-            value={value}
+            options={getAll() as OptionsOrGroups<CitySelectValue, GroupBase<CitySelectValue>>}
+            value={value as CitySelectValue} 
             onChange={(value) => onChange(value as CitySelectValue)}
-            options={getAll()}
             classNames={{
                 control: () => 'p-3 border-2',
                 input: () => 'text-lg',
