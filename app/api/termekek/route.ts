@@ -37,7 +37,7 @@ export async function POST(
             subcategory,
             city: city.value,
             userId: currentUser.id
-        }
+        } as Without<ListingCreateInput, ListingUncheckedCreateInput> & ListingUncheckedCreateInput
     })
 
     return NextResponse.json(listing)
