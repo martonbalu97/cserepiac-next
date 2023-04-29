@@ -10,6 +10,9 @@ import CategoryInput from "../inputs/CategoryInput";
 import { FieldValue, FieldValues, useForm } from "react-hook-form";
 import { sub } from "date-fns";
 import CitySelect, { CitySelectValue } from "../inputs/CitySelect"
+import dynamic from "next/dynamic";
+import { latLng } from "leaflet";
+
 
 enum STEPS {
     CATEGORY = 0,
@@ -48,6 +51,10 @@ const UploadModal = () => {
     const category = watch('category');
     const subcategory = watch('subcategory')
     const city = watch('city')
+
+    const Map = useMemo(() => dynamic(() => import("../Map"), {
+        ssr:false
+    }),[city])
 
     const setCustomValue = (id:string, value:any) =>{
         setValue(id,value, {
@@ -152,6 +159,7 @@ const UploadModal = () => {
     }
 
     if(step == STEPS.LOCATION){
+        const lalong = city.lat == undefined ? [47.1625,19.5033] : [Number(city.lat), Number(city.long)]
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading 
@@ -161,6 +169,9 @@ const UploadModal = () => {
                 <CitySelect
                  onChange={(value) => setCustomValue('city', value)}
                  value={city as CitySelectValue}
+                />
+                <Map
+                 center={lalong}
                 />
             </div>
         )
