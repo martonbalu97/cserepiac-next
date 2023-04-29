@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import prisma from '@/app/libs/prismadb'
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import Without from 'react'
 
 export async function POST(
     request:Request
@@ -37,7 +38,7 @@ export async function POST(
             subcategory,
             city: city.value,
             userId: currentUser.id
-        } as Without<ListingCreateInput, ListingUncheckedCreateInput> & ListingUncheckedCreateInput
+        } 
     })
 
     return NextResponse.json(listing)
