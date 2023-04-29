@@ -6,6 +6,7 @@ import TypeWriter from "@/app/typewriter/TypeWriter";
 import Container from "../Container";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
+import SideNavbar from "./SideNavbar";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -34,15 +35,15 @@ const Navbar: React.FC<NavbarProps> = ({
           "
         >
           <Logo />
-         <TypeWriter 
-         text={"Hello Balázs"}
-         interKeyStrokeDurationInMs={150}/>
           <UserMenu currentUser={currentUser} />
+          <SideNavbar/>
         </div>
       </Container>
       </div>
         <Categories />
+        
       </div>
+      
   );
 }
 
