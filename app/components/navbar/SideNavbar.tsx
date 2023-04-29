@@ -5,10 +5,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Disclosure } from "@headlessui/react";
 import {
   MdOutlineSpaceDashboard,
-  MdOutlineAnalytics,
-  MdOutlineIntegrationInstructions,
-  MdOutlineMoreHoriz,
-  MdOutlineSettings,
+  MdOutlineInfo,
+  MdOutlineAddBox,
   MdOutlineLogout,
   MdOutlineLogin,
   MdOutlineManageAccounts
@@ -46,11 +44,11 @@ const SideNavbar: React.FC<UserMenuProps> = ({
     }, []);
   
     const onUpload = useCallback(() =>{
-        /*
+        
         if(!currentUser){
           return loginModal.onOpen();
         }
-        */
+        
   
         uploadModal.onOpen();
   
@@ -103,9 +101,17 @@ const SideNavbar: React.FC<UserMenuProps> = ({
                 </h3>
               </div>
               <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <MdOutlineSpaceDashboard size={30} className="text-2xl text-gray-600 group-hover:text-white " />
+                <MdOutlineInfo size={30} className="text-2xl text-gray-600 group-hover:text-white " />
                 <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
-                  Dashboard
+                  Rólunk
+                </h3>
+              </div>
+              <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+              onClick={onUpload}
+              >
+                <MdOutlineAddBox size={30} className="text-2xl text-gray-600 group-hover:text-white " />
+                <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                  Termék feltöltése
                 </h3>
               </div>
               </div>
