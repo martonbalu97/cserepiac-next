@@ -99,7 +99,7 @@ const SideNavbar: React.FC<UserMenuProps> = ({
                 <div className="text-2xl text-gray-600 group-hover:text-white " />
                 <Avatar src={currentUser?.image} />
                 <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
-                  Profil
+                  {currentUser ? currentUser.name?.split(" ")[1]: "Profil"}
                 </h3>
               </div>
               <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
