@@ -35,8 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({
           "
         >
           <Logo />
-          <UserMenu currentUser={currentUser} />
-          <SideNavbar/>
+          <SideNavbar currentUser={currentUser}/>
         </div>
       </Container>
       </div>

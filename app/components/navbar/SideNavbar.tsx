@@ -10,6 +10,8 @@ import {
   MdOutlineMoreHoriz,
   MdOutlineSettings,
   MdOutlineLogout,
+  MdOutlineLogin,
+  MdOutlineManageAccounts
 } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FaRegComments } from "react-icons/fa";
@@ -21,6 +23,7 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useUploadModal from "@/app/hooks/useUploadModal";
 import { IoMdClose } from "react-icons/io";
 import Avatar from "../Avatar";
+import { signOut } from "next-auth/react";
 
 interface UserMenuProps {
     currentUser?: SafeUser | null
@@ -61,7 +64,7 @@ const SideNavbar: React.FC<UserMenuProps> = ({
 
   return (
     <div>
-        <div className="absolute top-4 right-4 inline-flex items-center peer justify-center rounded-md p-2 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group"
+        <div className="absolute top-2 right-6 inline-flex items-center peer justify-center rounded-md p-2 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group"
         onClick={toggleOpen}
         >
           <GiHamburgerMenu
@@ -86,7 +89,7 @@ const SideNavbar: React.FC<UserMenuProps> = ({
                   <IoMdClose size={18} />
                 </button>
               <h1 className="text-base text-center cursor-pointer font-bold text-blue-900 border-b border-gray-100 pb-4 w-full">
-                Virtual Dashboard
+                Menü
               </h1>
               </div>
               <div className=" my-4 border-b border-gray-100 pb-4">
@@ -105,7 +108,40 @@ const SideNavbar: React.FC<UserMenuProps> = ({
                   Dashboard
                 </h3>
               </div>
-             
+              </div>
+              <div className=" my-4 border-b border-gray-100 pb-4">
+                {/* Belépés/regisztráció */}
+                {!currentUser ?  (
+                    <>
+                    <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-200  hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={loginModal.onOpen}
+                    >
+                      <MdOutlineLogin className="text-2xl text-gray-600 group-hover:text-white " />
+                      <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                        Belépés
+                      </h3>
+                    </div>
+                    <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-200  hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={registerModal.onOpen}
+                    >
+                      <MdOutlineManageAccounts className="text-2xl text-gray-600 group-hover:text-white " />
+                      <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                        Regisztráció
+                      </h3>
+                    </div>
+                    </>
+                ) : (
+                    <>
+                    <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-200  hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={() => signOut()}
+                    >
+                    <MdOutlineLogout className="text-2xl text-gray-600 group-hover:text-white " />
+                      <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                        Regisztráció
+                      </h3>
+                    </div>
+                    </>
+                )}
               </div>
               </div>
               
