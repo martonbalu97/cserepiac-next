@@ -7,11 +7,16 @@ import {useEffect,useState, useMemo} from 'react'
 import Heading from "../Heading";
 import { categories, subCategs } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import { FieldValue, FieldValues, useForm } from "react-hook-form";
+import { FieldValue, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { sub } from "date-fns";
 import CitySelect, { CitySelectValue } from "../inputs/CitySelect"
 import dynamic from "next/dynamic";
 import { latLng } from "leaflet";
+import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 enum STEPS {
@@ -19,14 +24,16 @@ enum STEPS {
     SUBCATEGORY = 1,
     LOCATION = 2,
     PRODNAME = 3,
-    DESCRIPTION = 4,
-    IMAGES = 5
+    IMAGES = 4
+    
 }
 
 const UploadModal = () => {
     const uploadModal = useUploadModal();
+    const router = useRouter()
     
     const [step,setSteps] = useState(STEPS.CATEGORY)
+    const [isLoading, setIsLoading] = useState(false)
 
     const{
         register,
@@ -51,6 +58,7 @@ const UploadModal = () => {
     const category = watch('category');
     const subcategory = watch('subcategory')
     const city = watch('city')
+    const imageSrc = watch('imageSrc')
 
     const Map = useMemo(() => dynamic(() => import("../Map"), {
         ssr:false
@@ -70,6 +78,30 @@ const UploadModal = () => {
 
     const onNext = () =>{
         setSteps((value) => value + 1)
+    }
+
+    const onSubmit : SubmitHandler<FieldValues> = (data) =>{
+        if (step != STEPS.IMAGES){
+            return onNext()
+        }
+
+        setIsLoading(true);
+
+        console.log(data)
+        axios.post('/api/termekek',data)
+        .then(() =>{
+            toast.success("Sikeres feltöltés!")
+            router.refresh();
+            reset();
+            setSteps(STEPS.CATEGORY)
+            uploadModal.onClose()
+        })
+        .catch(() =>{
+            toast.error("Something went wrong!")
+        })
+        .finally(() =>{
+            setIsLoading(false)
+        })
     }
 
     const actionLabel = useMemo(() =>{
@@ -177,12 +209,60 @@ const UploadModal = () => {
         )
     }
 
+    if (step == STEPS.PRODNAME){
+        bodyContent = (
+            <div
+            className="flex flex-col gap-8"
+            >
+               <Heading
+               title="Hogyan írnád le a terméked?" 
+               subtitle="A rövid és tömör leírás lesz a legjobb!"
+               />
+               <Input 
+                id="title"
+                label="Termék neve"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+               />
+                <Input 
+                id="description"
+                label="Leírás"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+               />
+            </div>
+        )
+    }
+
+    if (step == STEPS.IMAGES){
+        bodyContent = (
+            <div
+            className="flex flex-col gap-8"
+            >
+               <Heading
+               title="Tölts fel néhány képet a termékről!" />
+               <ImageUpload 
+               value={imageSrc}
+               onChange={(value) => setCustomValue('imageSrc',value)}
+               />
+               
+            </div>
+        )
+    }
+
+
+
+
     return (
     <Modal
     title="Termék feltöltése"
     isOpen={uploadModal.isOpen}
     onClose={uploadModal.onClose}
-    onSubmit={onNext}
+    onSubmit={handleSubmit(onSubmit)}
     actionLabel={actionLabel}
     secondaryActionLabel={secondaryActionLabel}
     secondaryAction={step == STEPS.CATEGORY ? undefined : onBack}

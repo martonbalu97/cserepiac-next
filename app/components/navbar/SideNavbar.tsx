@@ -4,12 +4,13 @@ import React, { useCallback, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Disclosure } from "@headlessui/react";
 import {
-  MdOutlineSpaceDashboard,
+    MdOutlineFavoriteBorder,
   MdOutlineInfo,
   MdOutlineAddBox,
   MdOutlineLogout,
   MdOutlineLogin,
-  MdOutlineManageAccounts
+  MdOutlineManageAccounts,
+  MdOutlineMarkunreadMailbox
 } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FaRegComments } from "react-icons/fa";
@@ -45,12 +46,17 @@ const SideNavbar: React.FC<UserMenuProps> = ({
   
     const onUpload = useCallback(() =>{
         
+      /*
         if(!currentUser){
           return loginModal.onOpen();
         }
+        */
         
   
         uploadModal.onOpen();
+        if(isOpen){
+            toggleOpen()
+        }
   
     }, [currentUser,loginModal,uploadModal])
 
@@ -62,7 +68,7 @@ const SideNavbar: React.FC<UserMenuProps> = ({
 
   return (
     <div>
-        <div className="absolute top-2 right-6 inline-flex items-center peer justify-center rounded-md p-2 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group"
+        <div className="absolute top-2 right-6 inline-flex  items-center peer justify-center rounded-md p-2 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group"
         onClick={toggleOpen}
         >
           <GiHamburgerMenu
@@ -71,7 +77,7 @@ const SideNavbar: React.FC<UserMenuProps> = ({
               
         </div>
         {isOpen &&(
-            <div className="p-6 w-full h-screen bg-white z-20 fixed top-0 -left-0 lg:left-0 lg:w-60 focus:right-0 translate translate-x-0 duration-300">
+            <div className="lg:border-l-2 p-6 w-full h-screen bg-white z-20 fixed top-0 xs:-left-0 lg:right-0 lg:w-80 focus:right-0 transition-all duration-300">
             <div className="flex flex-col justify-start item-center">
             <button
                   className="
@@ -100,18 +106,34 @@ const SideNavbar: React.FC<UserMenuProps> = ({
                   {currentUser ? currentUser.name?.split(" ")[1]: "Profil"}
                 </h3>
               </div>
-              <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <MdOutlineInfo size={30} className="text-2xl text-gray-600 group-hover:text-white " />
-                <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
-                  Rólunk
-                </h3>
-              </div>
+              
               <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
               onClick={onUpload}
               >
                 <MdOutlineAddBox size={30} className="text-2xl text-gray-600 group-hover:text-white " />
                 <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
                   Termék feltöltése
+                </h3>
+              </div>
+              <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+              onClick={onUpload}
+              >
+                <MdOutlineMarkunreadMailbox size={30} className="text-2xl text-gray-600 group-hover:text-white " />
+                <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                  Saját piac
+                </h3>
+              </div>
+              <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+              >
+                <MdOutlineFavoriteBorder size={30} className="text-2xl text-gray-600 group-hover:text-white " />
+                <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                  Kedvencek
+                </h3>
+              </div>
+              <div className="flex mb-2 justify-start items-center gap-4 pl-4 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
+                <MdOutlineInfo size={30} className="text-2xl text-gray-600 group-hover:text-white " />
+                <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                  Rólunk
                 </h3>
               </div>
               </div>
