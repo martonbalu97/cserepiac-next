@@ -46,14 +46,14 @@ model Account {
 
 model Listing {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String   @db.ObjectId
-  title String
-  description String
-  imageSrc String
-  createdAt DateTime @default(now())
-  category  String
-  subcategory String
-  city String
+  userId          String   @db.ObjectId
+  title           String
+  description     String
+  imageSrc        String
+  createdAt       DateTime @default(now())
+  category        String
+  subcategory      String
+  city              String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
