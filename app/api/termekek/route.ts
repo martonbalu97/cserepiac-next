@@ -36,6 +36,7 @@ export async function POST(
             imageSrc,
             category,
             subcategory,
+            // @ts-ignore
             city: city.value,
             userId: currentUser.id
         } 
